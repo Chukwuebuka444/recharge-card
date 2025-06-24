@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-direction: column;
+            box-shadow: 2px 2px 2px 3px gray;
+            width: 70%;
+            margin-left: 200px;
+         }
+         .firstspace{
+          display: flex;
+          justify-content: center;
+         }
+        .balance{
+            width: 500px;
+            height: 50px;
+            background-color: yellow;
+            color: darkgray;
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+        }
+        
+         .mtn:hover,#airtel:hover,.glo:hover,#mymobile:hover{
+           transform: scale(1.05); 
+         }
+         .generatebtn{
+            background-color: green;
+            border-radius: 5px;
+            width: 100px;
+            height: 50px;
+            color: white;
+            margin-left: 50px;
+         }
+         .output,.output2{
+          color: green;
+          margin-left: 50px;
+         }
+    </style>
+</head>
+<body>
+   <div class="firstspace">
+     <button onclick="mtnbox()" class="mtn"><img src="mtn1limage.png" alt="" style="width: 200px;"></button>
+    <button onclick="airtelbox()" id="airtel"><img src="airtel image.png" alt=""></button>
+    <button onclick="globox()" class="glo"><img src="gloimage.jpeg" alt=""></button>
+    <button onclick="mymobilebox()" id="mymobile"><img src="mymobileimage.png" alt=""></button>
+   </div>
+    <div class="balance">Balance:</div>
+    <button onclick="generator()" class="generatebtn">generate</button>
+    <div class="output"></div>
+    <div class="output2"></div>
+</body>
+</html>
+
+
+<script>
+  let output = document.querySelector('.output')
+  let output2 = document.querySelector('.output2')
+  let cards = document.createElement('cards')
+  let generater = document.querySelector('.generatebtn')
+    let balancebox = document.querySelector('.balance')
+function mtnbox() {
+  document.querySelector('.balance').style.backgroundColor = 'yellow' 
+    balancebox.innerHTML = 'Balance:20000'
+    output2.innerHTML = 'This is your code for N500 MTN airtime'
+}
+function airtelbox() {
+  document.querySelector('.balance').style.backgroundColor = 'red'
+  balancebox.innerHTML = 'Balance:15000' 
+  output2.innerHTML = 'This is your code for N500 Airtel airtime'
+}
+function globox() {
+  document.querySelector('.balance').style.backgroundColor = 'green' 
+  balancebox.innerHTML = 'Balance:100'
+  output2.innerHTML = 'This is your code for N500 Glo airtime'
+}
+function mymobilebox() {
+  document.querySelector('.balance').style.backgroundColor = 'darkgreen'
+  balancebox.innerHTML = 'Balance:222000' 
+  output2.innerHTML = 'This is your code for N500 9Mobile airtime'
+}
+function generator() {
+  let rechargecards = []
+  
+    card = ""
+    for (let j = 0; j < 12; j++) {
+        card += Math.floor(Math.random()*10)
+        
+    }
+    rechargecards.push(card)
+  
+  output.innerHTML = rechargecards 
+  console.log(rechargecards);
+  
+}
+
+
+</script>
