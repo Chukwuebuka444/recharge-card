@@ -32,8 +32,16 @@
            transform: scale(1.05); 
          }
          .generatebtn{
-            background-color: green;
+            background-color: black;
             border-radius: 5px;
+            width: 100px;
+            height: 50px;
+            color: white;
+            margin-left: 50px;
+         }
+         .loadbtn{
+          background-color: black;
+          border-radius: 5px;
             width: 100px;
             height: 50px;
             color: white;
@@ -43,6 +51,51 @@
           color: green;
           margin-left: 50px;
          }
+         .amountscontainer{
+          display: flex;
+          flex-wrap: wrap;
+          width: 500px;
+          justify-content: space-between;
+          gap: 20px;
+          margin-left: 150px;
+         }
+         .btnz1,.btnz2,.btnz3,.btnz4,.btnz5,.btnz6{
+          background-color: white;
+          width: 150px;
+          height: 70px;
+          box-shadow: 2px 2px 2px 3px gray;
+          border: none;
+          border-radius: 5px;
+         }
+         .genload{
+          display: flex;
+          justify-content: space-between;
+         }
+         .inputs{
+          display: flex;
+          gap: 30px;
+          justify-content: space-between;
+          margin-left: 150px;
+         }
+         .input1,.input2{
+          width: 200px;
+          outline: none;
+          height: 30px;
+         }
+         .secondoutputs{
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+         }
+         .out12{
+          display: flex;
+          justify-content: space-between;
+         }
+         /* .table{
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+         } */
     </style>
 </head>
 <body>
@@ -52,54 +105,233 @@
     <button onclick="globox()" class="glo"><img src="gloimage.jpeg" alt=""></button>
     <button onclick="mymobilebox()" id="mymobile"><img src="mymobileimage.png" alt=""></button>
    </div>
+   
     <div class="balance">Balance:</div>
+    <div class="amountscontainer">
+    <button onclick="fundz1()" class="btnz1">50.00</button>
+    <button onclick="fundz2()" class="btnz2">100.00</button>
+    <button onclick="fundz3()" class="btnz3">200.00</button>
+    <button onclick="fundz4()" class="btnz4">300.00</button>
+    <button onclick="fundz5()" class="btnz5">400.00</button>
+    <button onclick="fundz6()" class="btnz6">500.00</button>
+   </div>
+   <div class="inputs">
+    <input class="input1" type="text">
+   <input class="input2" value="*311*pin#" type="text">
+   </div>
+   <div class="genload">
     <button onclick="generator()" class="generatebtn">generate</button>
+    <button onclick="cardloader()" class="loadbtn">Load Card</button>
+   </div>
     <div class="output"></div>
-    <div class="output2"></div>
+    <div class="secondoutputs">
+      <div class="out12">
+        <div class="output2"></div>
+      <div class="output3"></div>
+      </div>
+      <table>
+        <th>
+          <tr>
+            <th>S/N</th>
+            <th>Provider</th>
+            <th>Used</th>
+            <th>Amount</th>
+            <th>Pin</th>
+          </tr>
+        </th>
+              <tbody class="table"></tbody>
+      </table>
+
+    </div>
+    <div></div>
 </body>
 </html>
 
 
 <script>
+  let pick1 = document.querySelector('.btnz1')
+  let pick2 = document.querySelector('.btnz2')
+  let pick3 = document.querySelector('.btnz3')
+  let pick4 = document.querySelector('.btnz4')
+  let pick5 = document.querySelector('.btnz5')
+  let pick6 = document.querySelector('.btnz6')
   let output = document.querySelector('.output')
   let output2 = document.querySelector('.output2')
+  let rechargecards = []
+  let output3 = document.querySelector('.output3')
   let cards = document.createElement('cards')
   let generater = document.querySelector('.generatebtn')
+  let loadbtn = document.querySelector('.loadbtn')
     let balancebox = document.querySelector('.balance')
+    let input1 = document.querySelector('.input1')
+    let tables = document.querySelector('.table')
+    let input2 = document.querySelector('.input2').value.trim()
+    let inputVal = input2.slice(5, input2.length - 1)
+    
+    
+    
+console.log(rechargecards);
+
+function fundz1() {
+      let mtnvalue = document.querySelector('.btnz1').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
+    function fundz2() {
+      let mtnvalue = document.querySelector('.btnz2').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
+    function fundz3() {
+      let mtnvalue = document.querySelector('.btnz3').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
+    function fundz4() {
+      let mtnvalue = document.querySelector('.btnz4').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
+    function fundz5() {
+      let mtnvalue = document.querySelector('.btnz5').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
+    function fundz6() {
+      let mtnvalue = document.querySelector('.btnz6').textContent
+      input1.value = mtnvalue
+      console.log(input1.value);
+    }
 function mtnbox() {
   document.querySelector('.balance').style.backgroundColor = 'yellow' 
-    balancebox.innerHTML = 'Balance:20000'
-    output2.innerHTML = 'This is your code for N500 MTN airtime'
-}
+    // balancebox.innerHTML = 'Balance:20000'
+    output2.innerHTML = `This is your code for ${input1.value} MTN airtime`
+    console.log(output2.innerHTML);
+    
+  }
 function airtelbox() {
   document.querySelector('.balance').style.backgroundColor = 'red'
-  balancebox.innerHTML = 'Balance:15000' 
-  output2.innerHTML = 'This is your code for N500 Airtel airtime'
+  // balancebox.innerHTML = 'Balance:15000' 
+  output2.innerHTML = `This is your code for ${input1.value} Airtel airtime`
 }
 function globox() {
   document.querySelector('.balance').style.backgroundColor = 'green' 
-  balancebox.innerHTML = 'Balance:100'
-  output2.innerHTML = 'This is your code for N500 Glo airtime'
+  // balancebox.innerHTML = 'Balance:100'
+  output2.innerHTML = `This is your code for ${input1.value} Glo airtime`
 }
 function mymobilebox() {
   document.querySelector('.balance').style.backgroundColor = 'darkgreen'
-  balancebox.innerHTML = 'Balance:222000' 
-  output2.innerHTML = 'This is your code for N500 9Mobile airtime'
+  // balancebox.innerHTML = 'Balance:222000' 
+  output2.innerHTML = `This is your code for ${input1.value} 9Mobile airtime`
+  console.log();
+  
 }
+
+let card = ""
 function generator() {
-  let rechargecards = []
-  
-    card = ""
-    for (let j = 0; j < 12; j++) {
-        card += Math.floor(Math.random()*10)
-        
-    }
-    rechargecards.push(card)
-  
-  output.innerHTML = rechargecards 
+  card = ""
+  // rechargecards = []
   console.log(rechargecards);
   
+    
+    for (let j = 0; j < 12; j++) {
+        card += Math.floor(Math.random()*10)
+    }
+    rechargecards.push(card)
+  output.innerHTML = card
+  console.log(output.innerHTML);
+  tables.innerHTML = ""
+  for (let i = 0; i < rechargecards.length; i++) {
+    
+    tables.innerHTML += 
+    `<tr>
+      <td>${i+1}</td>  
+      <td>${input1.value}</td> 
+      <td>${card === inputVal}</td> 
+      <td>${rechargecards[i]}</td> 
+      </tr>`
+    console.log(`${card === inputVal}`);
+    
+  }
+
+  // let mycardobj = {
+  //  provider: ,
+  //  amount: ,
+  // }
+  
 }
+function cardloader() {
+  // let rechargecards = []
+  let input2 = document.querySelector('.input2').value.trim()
+
+   console.log(card);
+   let inputVal = input2.slice(5, input2.length - 1)
+    console.log(inputVal);
+  //  if (input2.length < 18) {
+  //    alert('invalid card')
+  //     return
+  //  }
+
+   if (card === inputVal) {
+    tables.innerHTML = ""
+    for (let i = 0; i < rechargecards.length; i++) {
+    output3.innerHTML = `Your Card is loaded successfully`
+    balancebox.innerHTML = `Balance:${input1.value}`
+    tables.innerHTML += `<tr>
+      <td>${i+1}</td>  
+      <td>${input1.value}</td> 
+      <td>${rechargecards[i] === inputVal}</td> 
+      <td>${rechargecards[i]}</td> 
+      </tr>`
+    
+    console.log(`${card === inputVal}`);
+    
+  }
+    
+   } else if (input2.length < 18) {
+    alert('Invalid Output')
+   } 
+   
+  
+  
+    
+   }
+
+   
+
+   
+   
+
+
+
+  // let inputVal = input2.slice(5, input2.length - 1)
+  // console.log(inputVal);
+  // console.log(input2);
+  
+  
+  // for (let i = 0; i < rechargecards.length; i++) {
+  //   const element = rechargecards[i];
+  //   if (inputVal === element) {
+  //     console.log(element);
+  //     output3.innerHTML = `Your Card is loaded successfully`
+  //     console.log(output3.innerHTML);
+  //     } 
+  //   else{
+  //     output3.innerHTML = `Invalid Card`
+  //     console.log(output3.innerHTML);
+  //   }
+  // }
+  
+  
+//  if (rechargecards[index] == input2) {
+//   alert('Your card is loaded Successfully')
+//   output3.innerHTML = ('Your card is loaded Successfully')
+//  } else{
+//   alert('Input a valid code')
+//  }
+ 
+
+
 
 
 </script>
