@@ -169,7 +169,7 @@
   let pick6 = document.querySelector('.btnz6')
   let output = document.querySelector('.output')
   let output2 = document.querySelector('.output2')
-  let rechargecards = []
+  let rechargecards = JSON.parse(localStorage.getItem('rechargecardsdatabase'))||[]
   let provider = 'mtn'
   let output3 = document.querySelector('.output3')
   let cards = document.createElement('cards')
@@ -261,7 +261,7 @@ function displayCards() {
 
   }
 }
-
+displayCards()
 function generator() {
   let card = ""
   console.log(rechargecards);
@@ -277,6 +277,7 @@ function generator() {
       amountVal: input1.value.trim()
     }
     rechargecards.push(cardObject)
+    localStorage.setItem('rechargecardsdatabase',JSON.stringify(rechargecards))
     console.log(rechargecards);
     displayCards()
   output.innerHTML = card
