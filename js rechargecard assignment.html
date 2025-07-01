@@ -91,11 +91,18 @@
           display: flex;
           justify-content: space-between;
          }
-         /* .table{
+         .btnzz{
           display: flex;
+          align-items: center;
           justify-content: space-between;
-          gap: 20px;
-         } */
+         }
+         .triplebtns{
+          background-color: black;
+          width: 150px;
+          border-radius: 5px;
+          height:50px;
+          color: white;
+         }
     </style>
 </head>
 <body>
@@ -129,6 +136,11 @@
         <div class="output2"></div>
       <div class="output3"></div>
       </div>
+      <div class="btnzz">
+        <button onclick="allcards()" class="triplebtns">Allcards</button>
+      <button onclick="usedcards()" class="triplebtns">Used cards</button>
+      <button onclick="unusedcards()" class="triplebtns">Unused Cards</button>
+      </div>
       <table>
         <th>
           <tr>
@@ -158,6 +170,7 @@
   let output = document.querySelector('.output')
   let output2 = document.querySelector('.output2')
   let rechargecards = []
+  let provider = 'mtn'
   let output3 = document.querySelector('.output3')
   let cards = document.createElement('cards')
   let generater = document.querySelector('.generatebtn')
@@ -165,8 +178,7 @@
     let balancebox = document.querySelector('.balance')
     let input1 = document.querySelector('.input1')
     let tables = document.querySelector('.table')
-    let input2 = document.querySelector('.input2').value.trim()
-    let inputVal = input2.slice(5, input2.length - 1)
+    let input2 = document.querySelector('.input2')
     
     
     
@@ -207,95 +219,140 @@ function mtnbox() {
     // balancebox.innerHTML = 'Balance:20000'
     output2.innerHTML = `This is your code for ${input1.value} MTN airtime`
     console.log(output2.innerHTML);
+    provider = 'mtn'
+    console.log(provider);
+    
     
   }
 function airtelbox() {
   document.querySelector('.balance').style.backgroundColor = 'red'
   // balancebox.innerHTML = 'Balance:15000' 
   output2.innerHTML = `This is your code for ${input1.value} Airtel airtime`
+  provider = 'airtel'
+  console.log(provider);
 }
 function globox() {
   document.querySelector('.balance').style.backgroundColor = 'green' 
   // balancebox.innerHTML = 'Balance:100'
   output2.innerHTML = `This is your code for ${input1.value} Glo airtime`
+  provider = 'glo'
+  console.log(provider);
 }
 function mymobilebox() {
   document.querySelector('.balance').style.backgroundColor = 'darkgreen'
   // balancebox.innerHTML = 'Balance:222000' 
   output2.innerHTML = `This is your code for ${input1.value} 9Mobile airtime`
-  console.log();
-  
+  provider = '9mobile'
+  console.log(provider);
 }
 
-let card = ""
+function displayCards() {
+    tables.innerHTML = ""
+  for (let i = 0; i < rechargecards.length; i++) {
+    let element = rechargecards[i]
+    tables.innerHTML += 
+    `<tr>
+      <td>${i+1}</td>  
+      <td>${element.providerVal}</td> 
+      <td>${element.isUsed}</td> 
+      <td>${element.amountVal}</td> 
+      <td>${element.pinVal}</td> 
+      </tr>`
+
+  }
+}
+
 function generator() {
-  card = ""
-  // rechargecards = []
+  let card = ""
   console.log(rechargecards);
   
     
     for (let j = 0; j < 12; j++) {
         card += Math.floor(Math.random()*10)
     }
-    rechargecards.push(card)
+    const cardObject = {
+      providerVal: provider,
+      pinVal: card,
+      isUsed: false,
+      amountVal: input1.value.trim()
+    }
+    rechargecards.push(cardObject)
+    console.log(rechargecards);
+    displayCards()
   output.innerHTML = card
   console.log(output.innerHTML);
-  tables.innerHTML = ""
-  for (let i = 0; i < rechargecards.length; i++) {
-    
-    tables.innerHTML += 
-    `<tr>
-      <td>${i+1}</td>  
-      <td>${input1.value}</td> 
-      <td>${card === inputVal}</td> 
-      <td>${rechargecards[i]}</td> 
-      </tr>`
-    console.log(`${card === inputVal}`);
-    
-  }
+
+}
 
   // let mycardobj = {
   //  provider: ,
   //  amount: ,
   // }
   
-}
+
 function cardloader() {
-  // let rechargecards = []
-  let input2 = document.querySelector('.input2').value.trim()
-
-   console.log(card);
-   let inputVal = input2.slice(5, input2.length - 1)
-    console.log(inputVal);
-  //  if (input2.length < 18) {
-  //    alert('invalid card')
-  //     return
-  //  }
-
-   if (card === inputVal) {
-    tables.innerHTML = ""
-    for (let i = 0; i < rechargecards.length; i++) {
-    output3.innerHTML = `Your Card is loaded successfully`
-    balancebox.innerHTML = `Balance:${input1.value}`
-    tables.innerHTML += `<tr>
-      <td>${i+1}</td>  
-      <td>${input1.value}</td> 
-      <td>${rechargecards[i] === inputVal}</td> 
-      <td>${rechargecards[i]}</td> 
-      </tr>`
+  console.log('Hello');
+  console.log(input2.value.trim());
+  let inputVal = input2.value.trim().slice(5, input2.value.trim().length-1)
+  console.log(inputVal);
+  
+  if (!input2.value.trim().startsWith('*311*') ||  !input2.value.trim().endsWith('#')) {
+    alert('Invalid loading format')
+  // } else if (condition) {
     
-    console.log(`${card === inputVal}`);
+  // }
+}
+let loadedpin = rechargecards.find(anyth=> anyth.pinVal === inputVal)
+
+   console.log(loadedpin);
+   let currentCard = rechargecards.indexOf(loadedpin)
+   console.log(currentCard);
+   rechargecards[currentCard].isUsed = true
+   displayCards()
+
+}
+function allcards() {
+  rechargecards.forEach(function(element,index,arr) {
+    console.log(element);
+    
     
   }
     
-   } else if (input2.length < 18) {
-    alert('Invalid Output')
-   } 
-   
+  );
+  displayCards()
+}
+function usedcards() {
+  let usedCardsOnly =  rechargecards.filter(card => card.isUsed === true)
+  tables.innerHTML = ""
+  usedCardsOnly.forEach((card,index) => {
+    tables.innerHTML += 
+    `<tr>
+      <td>${index+1}</td>  
+      <td>${card.providerVal}</td> 
+      <td>${card.isUsed}</td> 
+      <td>${card.amountVal}</td> 
+      <td>${card.pinVal}</td> 
+      </tr>`;
+
+  })
+}
+function unusedcards() {
+  let usedCardsOnly =  rechargecards.filter(card => card.isUsed === false)
+  tables.innerHTML = ""
+  usedCardsOnly.forEach((card,index) => {
+    tables.innerHTML += 
+    `<tr>
+      <td>${index+1}</td>  
+      <td>${card.providerVal}</td> 
+      <td>${card.isUsed}</td> 
+      <td>${card.amountVal}</td> 
+      <td>${card.pinVal}</td> 
+      </tr>`;
+
+  })
+}
   
   
-    
-   }
 
    
 
