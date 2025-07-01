@@ -310,7 +310,7 @@ let loadedpin = rechargecards.find(anyth=> anyth.pinVal === inputVal)
    console.log(currentCard);
    rechargecards[currentCard].isUsed = true
    displayCards()
-
+  output3.innerHTML = `Your Card is loaded successfully`  
 }
 function allcards() {
   rechargecards.forEach(function(element,index,arr) {
